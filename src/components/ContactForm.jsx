@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -8,19 +8,117 @@ const ContactForm = () => {
     typeOfService: '',
     preferredDate: ''
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState('')
+  const [submitError, setSubmitError] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  // Check if user has already submitted with this email
+  useEffect(() => {
+    const checkSubmission = () => {
+      const submittedEmails = JSON.parse(localStorage.getItem('submittedEmails') || '[]')
+      const currentEmail = formData.email.toLowerCase().trim()
+      
+      if (currentEmail && submittedEmails.includes(currentEmail)) {
+        setIsSubmitted(true)
+        setSubmitMessage('You have already submitted a consultation request with this email. Please use a different email or contact us directly.')
+        setSubmitError(true)
+      } else {
+        setIsSubmitted(false)
+        if (submitMessage && submitMessage.includes('already submitted')) {
+          setSubmitMessage('')
+          setSubmitError(false)
+        }
+      }
+    }
+
+    if (formData.email) {
+      checkSubmission()
+    }
+  }, [formData.email])
+
+  // Auto refresh page after successful submission
+  useEffect(() => {
+    if (submitMessage && !submitError && submitMessage.includes('successfully')) {
+      const timer = setTimeout(() => {
+        window.location.reload()
+      }, 3000) // 3 seconds delay
+
+      return () => clearTimeout(timer)
+    }
+  }, [submitMessage, submitError])
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
+    // Clear message when user starts typing
+    if (submitMessage) {
+      setSubmitMessage('')
+      setSubmitError(false)
+    }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    // You can add API call or form handling logic here
+    
+    // Check if already submitted
+    const submittedEmails = JSON.parse(localStorage.getItem('submittedEmails') || '[]')
+    const currentEmail = formData.email.toLowerCase().trim()
+    
+    if (submittedEmails.includes(currentEmail)) {
+      setSubmitMessage('You have already submitted a consultation request with this email. Please use a different email or contact us directly.')
+      setSubmitError(true)
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitMessage('')
+    setSubmitError(false)
+
+    try {
+      // API endpoint - adjust this URL based on your backend deployment
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/contact'
+      
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.success) {
+        // Store email in localStorage to prevent duplicate submissions
+        submittedEmails.push(currentEmail)
+        localStorage.setItem('submittedEmails', JSON.stringify(submittedEmails))
+        
+        setSubmitMessage(data.message || 'Your consultation request has been submitted successfully!')
+        setSubmitError(false)
+        setIsSubmitted(true)
+        
+        // Reset form
+        setFormData({
+          husbandName: '',
+          wifeName: '',
+          email: '',
+          typeOfService: '',
+          preferredDate: ''
+        })
+      } else {
+        setSubmitMessage(data.message || 'Something went wrong. Please try again.')
+        setSubmitError(true)
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setSubmitMessage('Failed to submit your request. Please check your internet connection and try again.')
+      setSubmitError(true)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -30,13 +128,11 @@ const ContactForm = () => {
           {/* Left Section - Heading */}
           <div className="w-full lg:w-1/5 flex-shrink-0 sm:mt-8">
             <h2 className="text-blue-900 font-bold" style={{ fontFamily: 'sans-serif' }}>
-              <span className="block text-base sm:text-lg lg:text-xl xl:text-2xl mb-2">
-                REQUEST FOR YOUR
-              </span>
-              <span className="block text-2xl sm:text-3xl lg:text-4xl xl:text-5xl">
-                Consultation
+              <span className="text-base sm:text-lg lg:text-xl xl:text-2xl mb-2 sm:block">
+                REQUEST FOR YOUR <span className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl">Consultation</span>
               </span>
             </h2>
+            
           </div>
 
           {/* Right Section - Form */}
@@ -116,13 +212,23 @@ const ContactForm = () => {
                 <div className="sm:col-span-2 lg:col-span-1">
                   <button
                     type="submit"
-                    className="w-full bg-blue-900 text-white font-bold px-6 py-3 sm:py-4 hover:bg-blue-800 transition-colors text-base sm:text-lg cursor-pointer"
+                    disabled={isSubmitting || isSubmitted}
+                    className="w-full bg-blue-900 text-white font-bold px-6 py-3 sm:py-4 hover:bg-blue-800 transition-colors text-base sm:text-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{ fontFamily: 'sans-serif' }}
                   >
-                    Book appointment
+                    {isSubmitting ? 'Submitting...' : isSubmitted ? 'Already Submitted' : 'Book appointment'}
                   </button>
                 </div>
               </div>
+
+              {/* Success/Error Message */}
+              {submitMessage && (
+                <div className={`mt-4 p-4 rounded-lg ${submitError ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-green-50 text-green-700 border border-green-200'}`}>
+                  <p className="text-sm sm:text-base" style={{ fontFamily: 'sans-serif' }}>
+                    {submitMessage}
+                  </p>
+                </div>
+              )}
             </form>
           </div>
         </div>

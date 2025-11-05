@@ -4,10 +4,34 @@ import FloatingConsultButton from '../components/FloatingConsultButton'
 
 const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [selectedReview, setSelectedReview] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
+
+  const openReviewModal = (review) => {
+    setSelectedReview(review)
+    setIsModalOpen(true)
+  }
+
+  const closeReviewModal = () => {
+    setIsModalOpen(false)
+    setSelectedReview(null)
+  }
+
+  // Close modal on ESC key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        setIsModalOpen(false)
+        setSelectedReview(null)
+      }
+    }
+    window.addEventListener('keydown', handleEscape)
+    return () => window.removeEventListener('keydown', handleEscape)
+  }, [isModalOpen])
 
   // Features used in Delivered Healthy Babies section
   const deliveredFeatures = [
@@ -89,12 +113,12 @@ const LandingPage = () => {
 
   // Video IDs for testimonials section
   const videoIds = [
-    'dQw4w9WgXcQ',
-    '9bZkp7q19f0',
-    '3JZ_D3ELwOQ',
-    'e-ORhEE9VVg',
-    'kXYiU_JCYtU',
-    'CevxZvSJLk8'
+    'n7OFN8asiWQ',
+    'PzkrtU5dchg',
+    'FJiwz5c-RWE',
+    '5jdSZz1tpJg',
+    'OpgqOL4fpoU',
+    '8R4_6qzyS0Y'
   ]
 
   // Mobile-only infinite carousel for videos
@@ -135,16 +159,73 @@ const LandingPage = () => {
           {slides.map((id, i) => (
             <div key={`${id}-${i}`} className="w-full flex-shrink-0 px-2">
               <div className="w-full aspect-video overflow-hidden shadow-md bg-black rounded-xl">
-                <iframe
-                  className="w-full h-full"
-                  src={`https://www.youtube.com/embed/${id}`}
-                  title="YouTube video"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
+                <a
+                  href={`https://www.youtube.com/watch?v=${id}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block w-full h-full relative"
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
+                    alt="YouTube thumbnail"
+                    className="w-full h-full object-cover opacity-90"
+                  />
+                  <span className="absolute inset-0 grid place-items-center">
+                    <svg className="w-16 h-16 sm:w-20 sm:h-20" viewBox="0 0 68 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M66.52 7.74c-.78-2.93-3.09-5.24-6.02-6.02C55.79 1 33 1 33 1s-22.79 0-27.5 1.72c-2.93.78-5.24 3.09-6.02 6.02C-1.5 12.45-1.5 24-1.5 24s0 11.55 1.72 16.26c.78 2.93 3.09 5.24 6.02 6.02C10.21 47 33 47 33 47s22.79 0 27.5-1.72c2.93-.78 5.24-3.09 6.02-6.02C68.5 35.55 68.5 24 68.5 24s0-11.55-1.98-16.26z" fill="#FF0000" />
+                      <path d="M26.94 32.06l17.64-10.06-17.64-10.06v20.12z" fill="white" />
+                    </svg>
+                  </span>
+                </a>
               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  // Infinite banner slider
+  const BannerSlider = () => {
+    const images = ['/Images/banner01.webp', '/Images/banner02.webp']
+    const [index, setIndex] = useState(1)
+    const [isTransitionEnabled, setIsTransitionEnabled] = useState(true)
+
+    useEffect(() => {
+      if (!images || images.length === 0) return
+      const id = setInterval(() => {
+        setIsTransitionEnabled(true)
+        setIndex((prev) => prev + 1)
+      }, 4000)
+      return () => clearInterval(id)
+    }, [images])
+
+    const handleTransitionEnd = () => {
+      const total = images.length
+      if (index === total + 1) {
+        setIsTransitionEnabled(false)
+        setIndex(1)
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => setIsTransitionEnabled(true))
+        })
+      }
+    }
+
+    const slides = [images[images.length - 1], ...images, images[0]]
+
+    return (
+      <div className="w-full overflow-hidden">
+        <div
+          className={`flex ${isTransitionEnabled ? 'transition-transform duration-1000 ease-in-out' : ''}`}
+          style={{ 
+            transform: `translateX(-${index * 100}%)`,
+            willChange: 'transform'
+          }}
+          onTransitionEnd={handleTransitionEnd}
+        >
+          {slides.map((img, i) => (
+            <div key={`banner-${i}`} className="w-full flex-shrink-0">
+              <img src={img} alt="Banner" className="w-full h-full object-cover" />
             </div>
           ))}
         </div>
@@ -332,7 +413,7 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between w-full border-b border-gray-100 relative sticky top-0 z-50">
+      <header className="bg-white px-4 sm:px-10 py-3 sm:py-3 flex items-center justify-between w-full border-b border-gray-100 relative sticky top-0 z-50">
         {/* Left Section - Logo and Brand */}
         <div className="flex items-center gap-2 sm:gap-4">
           {/* Logo - Mother holding baby illustration */}
@@ -452,8 +533,8 @@ const LandingPage = () => {
 
       {/* Rest of the page content */}
       <main>
-        {/* Banner Image */}
-        <img src="/Images/Banner 02 2.png" alt="Banner" className="w-full h-full object-cover" />
+        {/* Banner Image Slider */}
+        <BannerSlider />
 
         {/* Contact Form Section */}
         <ContactForm />
@@ -484,19 +565,19 @@ const LandingPage = () => {
                 Know Your Doctor
               </h2>
               <div className="space-y-5 text-gray-700 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
-                <p>
+                <p className="sm:text-center">
                   Dr Gauri Agarwal is an internationally recognized Infertility & IVF specialist who holds over
                   15 years of experience in Gynecology and Infertility and has received many prestigious awards
                   and recognition. She is trained at prestigious medical institutes in Belgium and Singapore in
                   eradicating problems of Infertility and Assisted Reproductive Technologies.
                 </p>
-                <p>
+                <p className="sm:text-center">
                   Dr Gauri has been a visionary in the field of IVF and has hence been a pioneer in implementing
                   path-breaking research and use of new technologies/techniques like PRP and Genetic Screening
                   (PGS/PGD) to achieve success rates of up to 78% along with an assurance of Healthy Term Pregnancy
                   and Genetically Healthy Baby.
                 </p>
-                <p>
+                <p className="sm:text-center">
                   Dr Gauri is also a philanthropist and has been working tirelessly for the cause of women’s health
                   especially working in rural areas around Delhi NCR to educate the masses about the misconceptions of
                   infertility and to ensure it is not considered a taboo, otherwise resulting in mental trauma for the
@@ -670,7 +751,7 @@ const LandingPage = () => {
           </div>
         </section>
         {/* Video Testimonials Section */}
-        <section id="news" className="bg-white py-12 sm:py-16 lg:py-20">
+        <section id="news" className="bg-white overflow-hidden py-12 sm:py-16 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8 sm:mb-10">
               <h3 className="text-[#21417E] font-bold text-xl sm:text-2xl md:text-3xl leading-snug" style={{ fontFamily: 'sans-serif' }}>
@@ -687,30 +768,39 @@ const LandingPage = () => {
             {/* 6 videos grid (tablet/desktop) */}
             <div className="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-6 sm:mt-0">
               {[
-                'dQw4w9WgXcQ', // placeholder IDs - replace with clinic videos
-                '9bZkp7q19f0',
-                '3JZ_D3ELwOQ',
-                'e-ORhEE9VVg',
-                'kXYiU_JCYtU',
-                'CevxZvSJLk8'
+                'n7OFN8asiWQ', // placeholder IDs - replace with clinic videos
+                'PzkrtU5dchg',
+                'FJiwz5c-RWE',
+                '5jdSZz1tpJg',
+                'OpgqOL4fpoU',
+                '8R4_6qzyS0Y'
               ].map((id) => (
                 <div key={id} className="w-full aspect-video overflow-hidden shadow-md bg-black">
-                  <iframe
-                    className="w-full h-full"
-                    src={`https://www.youtube.com/embed/${id}`}
-                    title="YouTube video"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
+                  <a
+                    href={`https://www.youtube.com/watch?v=${id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block w-full h-full relative"
+                  >
+                    <img
+                      src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
+                      alt="YouTube thumbnail"
+                      className="w-full h-full object-cover opacity-90"
+                    />
+                    <span className="absolute inset-0 grid place-items-center">
+                      <svg className="w-16 h-16 sm:w-20 sm:h-20" viewBox="0 0 68 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M66.52 7.74c-.78-2.93-3.09-5.24-6.02-6.02C55.79 1 33 1 33 1s-22.79 0-27.5 1.72c-2.93.78-5.24 3.09-6.02 6.02C-1.5 12.45-1.5 24-1.5 24s0 11.55 1.72 16.26c.78 2.93 3.09 5.24 6.02 6.02C10.21 47 33 47 33 47s22.79 0 27.5-1.72c2.93-.78 5.24-3.09 6.02-6.02C68.5 35.55 68.5 24 68.5 24s0-11.55-1.98-16.26z" fill="#FF0000" />
+                        <path d="M26.94 32.06l17.64-10.06-17.64-10.06v20.12z" fill="white" />
+                      </svg>
+                    </span>
+                  </a>
                 </div>
               ))}
             </div>
           </div>
         </section>
         {/* Feedback/Reviews Section */}
-        <section id="international" className="bg-white py-14 sm:py-18 lg:py-24">
+        <section id="international" className="bg-white overflow-hidden py-14 sm:py-18 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h3 className="text-center text-[#21417E] font-bold text-2xl sm:text-3xl md:text-4xl" style={{ fontFamily: 'sans-serif' }}>
               Feedback from our favourite patients
@@ -736,46 +826,90 @@ const LandingPage = () => {
                   {(() => {
                     const reviews = [
                       {
-                        name: 'Tulsi Academy',
-                        initials: 'TA',
-                        role: 'Content Creator',
+                        name: 'Chisenga Mwamba',
+                        initials: 'CM',
+                        role: 'Lusaka, Zambia',
                         text:
-                          'Thanks for Seeds of Innocence Team. Seeds of innocence team ke sath work bohot achha h. Hme first time m hi success mila. Price k according facility sabhi achhi h, special thanks to Lisha maam',
+                          'After 4 years of trying and multiple failed attempts in Zambia, we came to Seeds of Innocence. Dr. Gauri\'s expertise and the advanced PGT-A screening gave us hope. We are now blessed with our beautiful daughter. The care and support from the entire team was exceptional. Forever grateful!',
                       },
                       {
-                        name: 'Donald Jackman',
-                        initials: 'DJ',
-                        role: 'Content Creator',
+                        name: 'Fatma Al-Hashmi',
+                        initials: 'FH',
+                        role: 'Mabela, Muscat, Oman',
                         text:
-                          'I have been using Imagify for nearly two years, primarily for Instagram, and it has been incredibly user‑friendly, making my work much easier.',
+                          'We traveled from Oman to Delhi for IVF treatment. Dr. Gauri\'s approach is world-class and the in-house genetics lab is remarkable. The PGD screening helped us ensure a healthy pregnancy. Our twins are now 8 months old. The entire journey was seamless and worth every mile traveled!',
                       },
                       {
-                        name: 'Rambabu Yadav',
-                        initials: 'RY',
-                        role: 'Content Creator',
+                        name: 'Mwansa Banda',
+                        initials: 'MB',
+                        role: '  Kitwe, Zambia',
                         text:
-                          'It was a great experience to consult Dr. Gauri Madam. After getting treatment from SOI we got positive pregnancy. HIGHLY GRATEFUL to Dr. Lisha and SOI team.',
+                          'The best decision we made was coming to Seeds of Innocence. After years of infertility struggles, Dr. Gauri and her team provided exceptional care. The genetic screening technology is advanced and the personalized treatment plan worked perfectly. We finally have our healthy baby boy. Highly recommended!',
                       },
                       {
-                        name: 'Tulsi Academy',
-                        initials: 'TA',
-                        role: 'Content Creator',
+                        name: 'Amina Al-Mazroei',
+                        initials: 'AM',
+                        role: 'Muscat, Oman',
                         text:
-                          'Seeds of Innocence team ke sath work bohot achha h. Hme first time m hi success mila. Price k according facility achhi hain. Special thanks to Lisha maam.',
+                          'After multiple failed IVF attempts in Muscat, we found hope at Seeds of Innocence. Dr. Gauri\'s expertise in genetic screening and the comprehensive care we received was outstanding. The facility is modern and the staff is professional. Our family is now complete with our beautiful son. Thank you!',
                       },
                       {
-                        name: 'Donald Jackman',
-                        initials: 'DJ',
-                        role: 'Content Creator',
+                        name: 'Patricia Mulenga',
+                        initials: 'PM',
+                        role: 'Lusaka, Zambia',
                         text:
-                          'I have been using Imagify for nearly two years, primarily for Instagram, and it has been incredibly user‑friendly, making my work easier.',
+                          'We came to Seeds of Innocence after being told it was impossible. Dr. Gauri\'s treatment plan and the advanced PGT-A testing helped us achieve success on our first attempt. The support from Dr. Lisha and the entire SOI team was remarkable. We are now expecting our first child. Worth every effort!',
                       },
                       {
-                        name: 'Sample User',
-                        initials: 'SU',
-                        role: 'Patient',
+                        name: 'Salma Al-Rashdi',
+                        initials: 'SR',
+                        role: 'Mabela, Muscat, Oman',
                         text:
-                          'Amazing care and support throughout the process. Highly recommended for couples seeking guidance and treatment.',
+                          'The entire team at Seeds of Innocence made our journey from Oman to Delhi seamless. Dr. Gauri\'s expertise in genetic diagnosis and the comprehensive care we received was exceptional. The in-house genetics lab is a game-changer. We are blessed with our healthy daughter. Thank you for making our dream come true!',
+                      }
+                    ]
+                    const reviews1 = [
+                      {
+                        name: 'Grace Chanda',
+                        initials: 'GC',
+                        role: 'Lusaka, Zambia',
+                        text:
+                          'After 5 years of struggling with infertility, we decided to travel to India. Seeds of Innocence was recommended by a friend. Dr. Gauri\'s personalized approach and the PGT-A screening made all the difference. We are now proud parents of a healthy baby girl. The entire team\'s support throughout our journey was incredible. Thank you SOI!',
+                      },
+                      {
+                        name: 'Khadija Al-Saidi',
+                        initials: 'KS',
+                        role: 'Mabela, Muscat, Oman',
+                        text:
+                          'Coming from Oman, we were initially hesitant but Dr. Gauri and her team made us feel at home. The in-house genetics lab and PGD screening gave us confidence in our treatment. Our baby boy is now 6 months old and perfectly healthy. The facility is world-class and the staff is extremely caring. Highly recommend to anyone from Middle East!',
+                      },
+                      {
+                        name: 'Tawanda Phiri',
+                        initials: 'TP',
+                        role: 'Kitwe, Zambia',
+                        text:
+                          'We had tried everything in Zambia with no success. A relative suggested Seeds of Innocence and it was the best advice we ever received. Dr. Gauri\'s expertise in genetic screening and the advanced technology available helped us achieve success. Our daughter is now 10 months old. The care and attention we received was beyond our expectations!',
+                      },
+                      {
+                        name: 'Maryam Al-Balushi',
+                        initials: 'MB',
+                        role: 'Muscat, Oman',
+                        text:
+                          'After three failed IVF cycles in Muscat, we were losing hope. Seeds of Innocence changed everything. Dr. Gauri\'s comprehensive treatment plan and the genetic testing facilities are exceptional. We are now expecting twins! The support from Dr. Lisha and the entire SOI team has been remarkable. Worth every penny and every mile traveled!',
+                      },
+                      {
+                        name: 'Beatrice Ngoma',
+                        initials: 'BN',
+                        role: 'Lusaka, Zambia',
+                        text:
+                          'The journey from Zambia to Delhi seemed daunting, but Seeds of Innocence made it seamless. Dr. Gauri\'s approach to treatment is thorough and personalized. The PGT-A screening helped identify the best embryos. We are now blessed with our son who is 7 months old. The entire experience was professional and compassionate. Forever grateful!',
+                      },
+                      {
+                        name: 'Noor Al-Zadjali',
+                        initials: 'NZ',
+                        role: 'Mabela, Muscat, Oman',
+                        text:
+                          'Dr. Gauri and her team at Seeds of Innocence are truly exceptional. Coming from Oman, we were impressed by the modern facility and advanced genetic screening technology. The PGD testing ensured we had a healthy pregnancy. Our baby girl is now 9 months old and thriving. The personalized care and attention to detail made all the difference. Thank you!',
                       }
                     ]
 
@@ -790,7 +924,14 @@ const LandingPage = () => {
                         </div>
                         <div className="mt-1.5 text-red-500 text-xs" aria-hidden="true">★★★★★</div>
                         <p className="mt-1.5 text-[13px] text-gray-700 leading-relaxed line-clamp-4" style={{ fontFamily: 'sans-serif' }}>{r.text}</p>
-                        <button className="mt-1.5 text-[#21417E] text-xs font-semibold hover:underline cursor-pointer" style={{ fontFamily: 'sans-serif' }} {...handlers}>Read more</button>
+                        <button 
+                          className="mt-1.5 text-[#21417E] text-xs font-semibold hover:underline cursor-pointer" 
+                          style={{ fontFamily: 'sans-serif' }}
+                          onClick={() => openReviewModal(r)}
+                          {...handlers}
+                        >
+                          Read more
+                        </button>
                       </div>
                     )
 
@@ -806,7 +947,7 @@ const LandingPage = () => {
 
                         {/* Row 2 - right direction */}
                         <MarqueeRow
-                          items={[...reviews].reverse()}
+                          items={[...reviews1].reverse()}
                           direction="right"
                           speed={45}
                           renderItem={(item, idx, handlers) => Card(item, idx, handlers)}
@@ -819,10 +960,71 @@ const LandingPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Review Modal */}
+        {isModalOpen && selectedReview && (
+          <div 
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000a8] p-4"
+            onClick={closeReviewModal}
+          >
+            <div 
+              className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-6 sm:p-8">
+                {/* Modal Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="h-12 w-12 rounded-full bg-[#21417E] text-white flex items-center justify-center font-bold text-lg">
+                      {selectedReview.initials}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: 'sans-serif' }}>
+                        {selectedReview.name}
+                      </h3>
+                      <p className="text-sm text-gray-500" style={{ fontFamily: 'sans-serif' }}>
+                        {selectedReview.role}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={closeReviewModal}
+                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                    aria-label="Close modal"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Rating */}
+                <div className="mb-4 text-red-500 text-lg">★★★★★</div>
+
+                {/* Full Review Text */}
+                <div className="mb-6">
+                  <p className="text-base text-gray-700 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
+                    {selectedReview.text}
+                  </p>
+                </div>
+
+                {/* Close Button */}
+                <button
+                  onClick={closeReviewModal}
+                  className="w-full sm:w-auto px-6 py-2 bg-[#21417E] text-white font-semibold rounded hover:bg-[#1b3466] transition-colors"
+                  style={{ fontFamily: 'sans-serif' }}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Contact Form Section */}
         <ContactForm />
         {/* Map Section */}
-        <section id="contact" className="w-full py-8 sm:py-12 lg:py-16">
+        <section id="contact" className="w-full overflow-hidden py-8 sm:py-12 lg:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             {/* Mobile carousel */}
             <div className="lg:hidden">
@@ -887,7 +1089,7 @@ const LandingPage = () => {
           </div>
         </section>
         {/* Modern Footer Banner Section */}
-        <footer className="w-full mb-8">
+        <footer className="w-full overflow-hidden mb-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div className="flex flex-col items-center justify-center text-center">
               <h2 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-[#21417E] mb-3 leading-tight max-w-4xl">
