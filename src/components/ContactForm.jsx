@@ -79,7 +79,7 @@ const ContactForm = () => {
 
     try {
       // API endpoint - adjust this URL based on your backend deployment
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/contact'
+      const API_URL = 'https://dr-gauriagarwal-backend.vercel.app/api/contact'
       
       const response = await fetch(API_URL, {
         method: 'POST',
