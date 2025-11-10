@@ -185,54 +185,6 @@ const LandingPage = () => {
     )
   }
 
-  // Infinite banner slider
-  const BannerSlider = () => {
-    const images = ['/Images/banner01.webp', '/Images/banner02.webp']
-    const [index, setIndex] = useState(1)
-    const [isTransitionEnabled, setIsTransitionEnabled] = useState(true)
-
-    useEffect(() => {
-      if (!images || images.length === 0) return
-      const id = setInterval(() => {
-        setIsTransitionEnabled(true)
-        setIndex((prev) => prev + 1)
-      }, 4000)
-      return () => clearInterval(id)
-    }, [images])
-
-    const handleTransitionEnd = () => {
-      const total = images.length
-      if (index === total + 1) {
-        setIsTransitionEnabled(false)
-        setIndex(1)
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => setIsTransitionEnabled(true))
-        })
-      }
-    }
-
-    const slides = [images[images.length - 1], ...images, images[0]]
-
-    return (
-      <div className="w-full overflow-hidden">
-        <div
-          className={`flex ${isTransitionEnabled ? 'transition-transform duration-1000 ease-in-out' : ''}`}
-          style={{ 
-            transform: `translateX(-${index * 100}%)`,
-            willChange: 'transform'
-          }}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          {slides.map((img, i) => (
-            <div key={`banner-${i}`} className="w-full flex-shrink-0">
-              <img src={img} alt="Banner" className="w-full h-full object-cover" />
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
   // Mobile-only infinite carousel for maps
   const MobileMapCarousel = () => {
     const items = [
@@ -533,8 +485,10 @@ const LandingPage = () => {
 
       {/* Rest of the page content */}
       <main>
-        {/* Banner Image Slider */}
-        <BannerSlider />
+        {/* Banner Image */}
+        <div className="w-full">
+          <img src="/Images/Banner 02 2.png" alt="Banner" className="w-full h-full object-cover" />
+        </div>
 
         {/* Contact Form Section */}
         <ContactForm />
