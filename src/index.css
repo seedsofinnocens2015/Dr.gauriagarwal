@@ -1,8 +1,27 @@
 @import "tailwindcss";
 
-/* Set global font-family to sans-serif. For overrides, use inline style in components. */
+/* Set global font-family to Plato Sans (fallback to Inter) for better readability */
 html, body {
-  font-family: 'sans-serif', Arial, Helvetica, sans-serif;
+  font-family: 'Plato Sans', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}
+
+/* Heading font - BEBAS NEUE */
+h1, h2, h3, h4, h5, h6,
+.heading-font {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .animated-underline {

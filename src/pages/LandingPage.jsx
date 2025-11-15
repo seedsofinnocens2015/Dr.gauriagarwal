@@ -93,12 +93,12 @@ const LandingPage = () => {
                 <div className="mx-auto flex items-center justify-center">
                   <img src={feat.image} alt="feature" className="w-24 h-24 object-contain" />
                 </div>
-                <h4 className="mt-4 text-[#21417E] font-semibold text-base" style={{ fontFamily: 'sans-serif' }}>
+                <h4 className="mt-4 text-[#21417E] font-semibold text-base">
                   {feat.titleLines.map((t, idx) => (
                     <span key={idx} className="block">{t}</span>
                   ))}
                 </h4>
-                <p className="mt-2 text-gray-600 text-xs leading-snug" style={{ fontFamily: 'sans-serif' }}>
+                <p className="mt-2 text-gray-600 text-xs leading-snug">
                   {feat.descLines.map((d, idx) => (
                     <span key={idx} className="block">{d}</span>
                   ))}
@@ -245,14 +245,14 @@ const LandingPage = () => {
           {slides.map((m, i) => (
             <div key={i} className="w-full flex-shrink-0 px-2">
               <div className="w-full overflow-hidden">
-                <h3 className="text-[#21417E] font-extrabold leading-tight px-3 pt-3" style={{ fontFamily: 'sans-serif' }}>
+                <h3 className="text-[#21417E] font-extrabold leading-tight px-3 pt-3">
                   <span className="block text-sm">{m.title}</span>
                 </h3>
-                <span className="block text-base px-3" style={{ fontFamily: 'cursive' }}>{m.time}</span>
+                <span className="block text-base px-3">{m.time}</span>
                 <a
                   href="tel:9810350512"
                   className="block text-base text-gray-500 px-3 pb-3 hover:underline"
-                  style={{ fontFamily: 'cursive', cursor: 'pointer' }}
+                  style={{ cursor: 'pointer' }}
                 >
                   Phone: +91-9810350512
                 </a>
@@ -380,19 +380,19 @@ const LandingPage = () => {
 
         {/* Middle Section - Navigation Links (Desktop) */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-          <a href="#about" className="text-gray-700 hover:text-red-600 transition-colors animated-underline text-sm xl:text-base" style={{ fontFamily: 'sans-serif' }}>
+          <a href="#about" className="text-gray-700 hover:text-red-600 transition-colors animated-underline text-sm xl:text-base">
             About Us
           </a>
-          {/* <a href="#success" className="text-gray-700 hover:text-red-600 transition-colors animated-underline text-sm xl:text-base" style={{ fontFamily: 'sans-serif' }}>
+          {/* <a href="#success" className="text-gray-700 hover:text-red-600 transition-colors animated-underline text-sm xl:text-base">
             Success Stories
           </a> */}
-          <a href="#international" className="text-gray-700 hover:text-red-600 transition-colors animated-underline text-sm xl:text-base" style={{ fontFamily: 'sans-serif' }}>
+          <a href="#international" className="text-gray-700 hover:text-red-600 transition-colors animated-underline text-sm xl:text-base">
             International IVF Patient
           </a>
-          <a href="#news" className="text-gray-700 hover:text-red-600 transition-colors animated-underline text-sm xl:text-base" style={{ fontFamily: 'sans-serif' }}>
+          <a href="#news" className="text-gray-700 hover:text-red-600 transition-colors animated-underline text-sm xl:text-base">
             News And Media
           </a>
-          <a href="#contact" className="text-gray-700 hover:text-red-600 transition-colors animated-underline text-sm xl:text-base" style={{ fontFamily: 'sans-serif' }}>
+          <a href="#contact" className="text-gray-700 hover:text-red-600 transition-colors animated-underline text-sm xl:text-base">
             Contact Us
           </a>
         </nav>
@@ -442,7 +442,6 @@ const LandingPage = () => {
                 href="#about"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-gray-700 hover:text-red-600 transition-colors py-3 border-b border-gray-100 animated-underline"
-                style={{ fontFamily: 'sans-serif' }}
               >
                 About Us
               </a>
@@ -450,7 +449,6 @@ const LandingPage = () => {
                 href="#success"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-gray-700 hover:text-red-600 transition-colors py-3 border-b border-gray-100 animated-underline"
-                style={{ fontFamily: 'sans-serif' }}
               >
                 Success Stories
               </a> */}
@@ -458,7 +456,6 @@ const LandingPage = () => {
                 href="#international"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-gray-700 hover:text-red-600 transition-colors py-3 border-b border-gray-100 animated-underline"
-                style={{ fontFamily: 'sans-serif' }}
               >
                 International IVF Patient
               </a>
@@ -466,7 +463,6 @@ const LandingPage = () => {
                 href="#news"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-gray-700 hover:text-red-600 transition-colors py-3 border-b border-gray-100 animated-underline"
-                style={{ fontFamily: 'sans-serif' }}
               >
                 News And Media
               </a>
@@ -474,7 +470,6 @@ const LandingPage = () => {
                 href="#contact"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-gray-700 hover:text-red-600 transition-colors py-3 animated-underline"
-                style={{ fontFamily: 'sans-serif' }}
               >
                 Contact Us
               </a>
@@ -515,23 +510,23 @@ const LandingPage = () => {
 
             {/* Right: Content */}
             <div>
-              <h2 className="text-[#21417E] text-2xl sm:text-3xl lg:text-4xl font-bold mb-5" style={{ fontFamily: 'sans-serif' }}>
+              <h2 className="text-[#21417E] text-2xl sm:text-4xl lg:text-5xl font-bold mb-5">
                 Know Your Doctor
               </h2>
-              <div className="space-y-5 text-gray-700 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
-                <p className="sm:text-center">
+              <div className="space-y-5 text-gray-700 leading-relaxed">
+                <p >
                   Dr Gauri Agarwal is an internationally recognized Infertility & IVF specialist who holds over
                   15 years of experience in Gynecology and Infertility and has received many prestigious awards
                   and recognition. She is trained at prestigious medical institutes in Belgium and Singapore in
                   eradicating problems of Infertility and Assisted Reproductive Technologies.
                 </p>
-                <p className="sm:text-center">
+                <p>
                   Dr Gauri has been a visionary in the field of IVF and has hence been a pioneer in implementing
                   path-breaking research and use of new technologies/techniques like PRP and Genetic Screening
                   (PGS/PGD) to achieve success rates of up to 78% along with an assurance of Healthy Term Pregnancy
                   and Genetically Healthy Baby.
                 </p>
-                <p className="sm:text-center">
+                <p>
                   Dr Gauri is also a philanthropist and has been working tirelessly for the cause of women’s health
                   especially working in rural areas around Delhi NCR to educate the masses about the misconceptions of
                   infertility and to ensure it is not considered a taboo, otherwise resulting in mental trauma for the
@@ -557,9 +552,9 @@ const LandingPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               {/* Left Content */}
               <div className="max-w-2xl">
-                <h3 className="text-[#21417E] font-extrabold leading-tight" style={{ fontFamily: 'sans-serif' }}>
-                  <span className="block text-2xl sm:text-3xl">DELIVERED</span>
-                  <span className="block text-2xl sm:text-3xl md:text-4xl mt-1">20,000+ HEALTHY BABIES</span>
+                <h3 className="text-[#21417E] font-extrabold leading-tight">
+                  <span className="block text-3xl sm:text-5xl">DELIVERED</span>
+                  <span className="block text-3xl sm:text-5xl md:text-6xl mt-1">20,000+ HEALTHY BABIES</span>
                 </h3>
 
                 {/* Features */}
@@ -574,13 +569,13 @@ const LandingPage = () => {
                       {/* hand-heart icon */}
                       <img src="/Images/01.png" alt="Hand Heart" className="w-25 h-25 object-contain" />
                     </div>
-                    <h4 className="mt-4 text-[#21417E] font-semibold text-sm sm:text-base" style={{ fontFamily: 'sans-serif' }}>
-                      North India’s
+                    <h4 className="mt-4 text-[#21417E] font-bold text-sm sm:text-xl">
+                      North India's
                       <br />FirstIVF Chain with In
                       <br />house Genetic Lab
                     </h4>
-                    <p className="mt-2 text-gray-600 text-xs leading-snug" style={{ fontFamily: 'sans-serif' }}>
-                      Fewer pregnancy losses &
+                    <p className="mt-2 text-gray-600 text-sm leading-snug">
+                      Fewer pregnancy losses
                       <br />Less uncertainty
                     </p>
                   </div>
@@ -591,14 +586,14 @@ const LandingPage = () => {
                       {/* medal icon */}
                       <img src="/Images/02.png" alt="Medal" className="w-25 h-25 object-contain" />
                     </div>
-                    <h4 className="mt-4 text-[#21417E] font-semibold text-sm sm:text-base" style={{ fontFamily: 'sans-serif' }}>
+                    <h4 className="mt-4 text-[#21417E] font-bold text-sm sm:text-xl">
                       Recognition &
                       <br />Affiliation
                     </h4>
-                    <p className="mt-2 text-gray-600 text-xs leading-snug" style={{ fontFamily: 'sans-serif' }}>
-                      BW Healthcare 40 under 40
-                      <br />ET Health world Hall of Fame
-                      <br />IVF Specialist
+                    <p className="mt-2 text-gray-600 text-sm leading-snug">
+                      BW Healthcare 40 under
+                      <br /> 40 ET Health world Hall
+                      <br /> of Fame IVF Specialist
                     </p>
                   </div>
 
@@ -608,14 +603,14 @@ const LandingPage = () => {
                       {/* baby-feet icon */}
                       <img src="/Images/03.png" alt="Baby Feet" className="w-25 h-25 object-contain" />
                     </div>
-                    <h4 className="mt-4 text-[#21417E] font-semibold text-sm sm:text-base" style={{ fontFamily: 'sans-serif' }}>
+                    <h4 className="mt-4 text-[#21417E] font-bold text-sm sm:text-xl">
                       Advanced Infertility
                       <br />Treatment Services
                     </h4>
-                    <p className="mt-2 text-gray-600 text-xs leading-snug" style={{ fontFamily: 'sans-serif' }}>
+                    <p className="mt-2 text-gray-600 text-sm leading-snug">
                       Dedicated Fetal Medicine
-                      <br />Department Multidisciplinary
-                      <br />team of specialists
+                      <br /> Department Multidisciplinary
+                      <br /> Team of Specialists
                     </p>
                   </div>
                 </div>
@@ -632,7 +627,7 @@ const LandingPage = () => {
         <section className="relative overflow-hidden bg-[#FAFAFB]">
           <div className="">
             <div className="flex justify-center items-center lg:py-15">
-              <h2 className="text-[#21417E] text-2xl sm:text-3xl lg:text-4xl font-bold  text-center" style={{ fontFamily: 'sans-serif' }}>
+              <h2 className="text-[#21417E] text-2xl sm:text-4xl lg:text-5xl font-bold  text-center">
                 BEST TREATMENT PLAN FOR YOU
               </h2>
             </div>
@@ -659,19 +654,19 @@ const LandingPage = () => {
 
             {/* Right: content */}
             <div className="order-1 lg:order-2">
-              <h3 className="text-[#21417E] font-extrabold leading-tight" style={{ fontFamily: 'sans-serif' }}>
-                <span className="block text-xl sm:text-2xl">THE BEST IVF CENTRE IN DELHI</span>
-                <span className="block text-xl sm:text-2xl">AS WELL AS IN NORTH INDIA WITH</span>
-                <span className="block text-xl sm:text-2xl">AN IN-HOUSE GENETICS LAB.</span>
+              <h3 className="text-[#21417E] font-extrabold leading-tight">
+                <span className="block text-2xl sm:text-4xl">THE BEST IVF CENTRE IN DELHI</span>
+                <span className="block text-2xl sm:text-4xl">AS WELL AS IN NORTH INDIA WITH</span>
+                <span className="block text-2xl sm:text-4xl">AN IN-HOUSE GENETICS LAB.</span>
               </h3>
 
               {/* PGT-A */}
               <div className="mt-6">
-                <h4 className="text-[#21417E] font-extrabold text-sm sm:text-base tracking-wide" style={{ fontFamily: 'sans-serif' }}>
+                <h4 className="text-[#21417E] font-bold text-sm sm:text-xl tracking-wide">
                   PRE-IMPLANTATION
                   <br /> GENETIC SCREENING (PGT-A)
                 </h4>
-                <p className="mt-2 text-gray-700 text-sm leading-relaxed max-w-xl" style={{ fontFamily: 'sans-serif' }}>
+                <p className="mt-2 text-gray-700 text-sm leading-snug max-w-xl">
                   Ensuring results for couples who have faced multiple failed IVFs,
                   <br className="hidden sm:block" /> and advanced maternal age.
                 </p>
@@ -679,11 +674,11 @@ const LandingPage = () => {
 
               {/* PGD */}
               <div className="mt-6">
-                <h4 className="text-[#21417E] font-extrabold text-sm sm:text-base tracking-wide" style={{ fontFamily: 'sans-serif' }}>
+                <h4 className="text-[#21417E] font-bold text-sm sm:text-xl tracking-wide">
                   PRE-IMPLANTATION
                   <br /> GENETIC DIAGNOSIS (PGD)
                 </h4>
-                <p className="mt-2 text-gray-700 text-sm leading-relaxed max-w-xl" style={{ fontFamily: 'sans-serif' }}>
+                <p className="mt-2 text-gray-700 text-sm leading-snug max-w-xl">
                   Screening the embryo for over 400 heredity diseases, when one or both
                   <br className="hidden sm:block" />
                   the parents are carriers of genetic abnormality.
@@ -696,7 +691,6 @@ const LandingPage = () => {
                   target="_blank"
                   rel="noreferrer"
                   className="inline-block bg-[#21417E] hover:bg-[#1b3466] text-white font-semibold px-6 py-3 shadow"
-                  style={{ fontFamily: 'sans-serif' }}
                 >
                   Consult Now
                 </a>
@@ -708,10 +702,10 @@ const LandingPage = () => {
         <section id="news" className="bg-white overflow-hidden py-12 sm:py-16 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8 sm:mb-10">
-              <h3 className="text-[#21417E] font-bold text-xl sm:text-2xl md:text-3xl leading-snug" style={{ fontFamily: 'sans-serif' }}>
+              <h3 className="text-[#21417E] font-bold text-xl sm:text-2xl md:text-4xl leading-snug">
                 When the odds of fertility act against you, Place your trust in us.
               </h3>
-              <h3 className="text-[#21417E] font-bold text-xl sm:text-2xl md:text-3xl leading-snug" style={{ fontFamily: 'sans-serif' }}>
+              <h3 className="text-[#21417E] font-bold text-xl sm:text-2xl md:text-4xl leading-snug">
                 Call us to schedule your fertility consultation
               </h3>
             </div>
@@ -756,7 +750,7 @@ const LandingPage = () => {
         {/* Feedback/Reviews Section */}
         <section id="international" className="bg-white overflow-hidden py-14 sm:py-18 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 className="text-center text-[#21417E] font-bold text-2xl sm:text-3xl md:text-4xl" style={{ fontFamily: 'sans-serif' }}>
+            <h3 className="text-center text-[#21417E] font-bold text-2xl sm:text-4xl md:text-5xl">
               Feedback from our favourite patients
             </h3>
 
@@ -765,11 +759,11 @@ const LandingPage = () => {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                 {/* Left copy */}
                 <div className="lg:col-span-4 flex flex-col justify-center h-full text-center lg:text-left lg:pl-6 xl:pl-10">
-                  <h4 className="text-[#21417E] font-extrabold text-lg sm:text-xl leading-snug" style={{ fontFamily: 'sans-serif' }}>
+                  <h4 className="text-[#21417E] font-extrabold text-2xl sm:text-3xl leading-snug">
                     Thank you for trusting us with
                     <br /> your Journey !
                   </h4>
-                  <p className="mt-3 text-gray-700 max-w-sm mx-auto lg:mx-0 text-sm sm:text-base" style={{ fontFamily: 'sans-serif' }}>
+                  <p className="mt-3 text-gray-700 max-w-sm mx-auto lg:mx-0 text-sm sm:text-base">
                     below and leave us a 5-star review to help
                     others on their path to parenthood.
                   </p>
@@ -872,15 +866,14 @@ const LandingPage = () => {
                         <div className="flex items-center gap-2.5">
                           <div className="h-8 w-8 rounded-full bg-[#21417E] text-white flex items-center justify-center font-bold text-xs">{r.initials}</div>
                           <div>
-                            <p className="text-[13px] font-semibold text-gray-900" style={{ fontFamily: 'sans-serif' }}>{r.name}</p>
-                            <p className="text-[11px] text-gray-500" style={{ fontFamily: 'sans-serif' }}>{r.role}</p>
+                            <p className="text-[13px] font-semibold text-gray-900">{r.name}</p>
+                            <p className="text-[11px] text-gray-500">{r.role}</p>
                           </div>
                         </div>
                         <div className="mt-1.5 text-red-500 text-xs" aria-hidden="true">★★★★★</div>
-                        <p className="mt-1.5 text-[13px] text-gray-700 leading-relaxed line-clamp-4" style={{ fontFamily: 'sans-serif' }}>{r.text}</p>
+                        <p className="mt-1.5 text-[13px] text-gray-700 leading-relaxed line-clamp-4">{r.text}</p>
                         <button 
                           className="mt-1.5 text-[#21417E] text-xs font-semibold hover:underline cursor-pointer" 
-                          style={{ fontFamily: 'sans-serif' }}
                           onClick={() => openReviewModal(r)}
                           {...handlers}
                         >
@@ -933,10 +926,10 @@ const LandingPage = () => {
                       {selectedReview.initials}
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: 'sans-serif' }}>
+                      <h3 className="text-xl font-bold text-gray-900">
                         {selectedReview.name}
                       </h3>
-                      <p className="text-sm text-gray-500" style={{ fontFamily: 'sans-serif' }}>
+                      <p className="text-sm text-gray-500">
                         {selectedReview.role}
                       </p>
                     </div>
@@ -957,7 +950,7 @@ const LandingPage = () => {
 
                 {/* Full Review Text */}
                 <div className="mb-6">
-                  <p className="text-base text-gray-700 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
+                  <p className="text-base text-gray-700 leading-relaxed">
                     {selectedReview.text}
                   </p>
                 </div>
@@ -966,7 +959,6 @@ const LandingPage = () => {
                 <button
                   onClick={closeReviewModal}
                   className="w-full sm:w-auto px-6 py-2 bg-[#21417E] text-white font-semibold rounded hover:bg-[#1b3466] transition-colors"
-                  style={{ fontFamily: 'sans-serif' }}
                 >
                   Close
                 </button>
@@ -989,14 +981,14 @@ const LandingPage = () => {
             <div className="hidden lg:flex flex-row gap-8">
               {/* Google Map - Ghaziabad */}
               <div className="w-1/2 flex flex-col">
-                <h3 className="text-[#21417E] font-extrabold leading-tight" style={{ fontFamily: 'sans-serif' }}>
-                  <span className="block text-sm">SEEDS OF INNOCENCE IVF CENTRE - BEST IVF CENTRE IN <span className="text-[#CC2023]">GHAZIABAD</span></span>
+                <h3 className="text-[#21417E] font-extrabold leading-tight">
+                  <span className="block text-xl sm:text-2xl">SEEDS OF INNOCENCE IVF CENTRE - BEST IVF CENTRE IN <span className="text-[#CC2023]">GHAZIABAD</span></span>
                 </h3>
-                <span className="block text-lg pt-2" style={{ fontFamily: 'cursive' }}>Timings: 9:00 AM - 1:00 PM</span>
+                <span className="block text-lg pt-2">Timings: 9:00 AM - 1:00 PM</span>
                 <a
                   href="tel:9810350512"
                   className="block text-base text-gray-500 pb-4 hover:underline"
-                  style={{ fontFamily: 'cursive', cursor: 'pointer' }}
+                  style={{ cursor: 'pointer' }}
                 >
                   Phone: +91-9810350512
                 </a>
@@ -1015,14 +1007,14 @@ const LandingPage = () => {
               </div>
               {/* Google Map - Delhi */}
               <div className="w-1/2 flex flex-col">
-                <h3 className="text-[#21417E] font-extrabold leading-tight" style={{ fontFamily: 'sans-serif' }}>
-                  <span className="block text-sm">SEEDS OF INNOCENCE IVF CENTRE - BEST IVF CENTRE IN <span className="text-[#CC2023]">DELHI</span></span>
+                <h3 className="text-[#21417E] font-extrabold leading-tight">
+                  <span className="block text-xl sm:text-2xl">SEEDS OF INNOCENCE IVF CENTRE - BEST IVF CENTRE IN <span className="text-[#CC2023]">DELHI</span></span>
                 </h3>
-                <span className="block text-lg pt-2" style={{ fontFamily: 'cursive' }}>Timings: 2:00 PM - 6:00 PM</span>
+                <span className="block text-lg pt-2">Timings: 2:00 PM - 6:00 PM</span>
                 <a
                   href="tel:9810350512"
                   className="block text-base text-gray-500 pb-4 hover:underline"
-                  style={{ fontFamily: 'cursive', cursor: 'pointer' }}
+                  style={{ cursor: 'pointer' }}
                 >
                   Phone: +91-9810350512
                 </a>
@@ -1046,13 +1038,13 @@ const LandingPage = () => {
         <footer className="w-full overflow-hidden mb-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div className="flex flex-col items-center justify-center text-center">
-              <h2 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-[#21417E] mb-3 leading-tight max-w-4xl">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#21417E] mb-3 leading-tight max-w-4xl">
                 Get Free Second Opinion
               </h2>
-              <p className="text-lg font-semibold text-black mb-2 max-w-4xl">
+              <p className="text-2xl sm:text-2xl lg:text-xl font-semibold text-black mb-2 max-w-4xl">
                 Register Online For Seamless Experience. Book Your Online Appointment Within Minutes.
               </p>
-              <p className="text-base font-semibold text-black mb-4 max-w-2xl">
+              <p className="text-xl sm:text-xl lg:text-2xl font-semibold text-black mb-4 max-w-2xl">
                 Call Now <span className="font-bold">+91-9810350512</span> or &nbsp; <br className="sm:hidden" />
                 <span className="underline cursor-pointer hover:text-[#21417E]">Book an Appointment</span>
               </p>
@@ -1068,7 +1060,7 @@ const LandingPage = () => {
 
                 {/* Center: Headline and links */}
                 <div className="text-center md:text-left">
-                  <h3 className="text-lg sm:text-lg font-extrabold leading-snug">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-extrabold leading-snug">
                     Take your first step towards
                     <br className="hidden sm:block" /> happiness with Trusted Fertility Chain
                   </h3>
@@ -1093,12 +1085,12 @@ const LandingPage = () => {
                       </a>
                     ))}
                   </div> */}
-                  <p className="mt-2 text-xs opacity-90">© Copyright. All rights reserved group of Seeds of Innocence</p>
+                  <p className="mt-2 text-sm opacity-90">© Copyright. All rights reserved group of Seeds of Innocence</p>
                 </div>
 
                 {/* Right: Help + WhatsApp + Socials */}
                 <div className="md:pl-8">
-                  <p className="text-sm opacity-90">Need help? Talk to our fertility experts.</p>
+                  <p className="text-base opacity-90">Need help? Talk to our fertility experts.</p>
                   <div className="mt-3 flex items-center gap-3">
                     {/* WhatsApp badge */}
                     <a
@@ -1112,7 +1104,7 @@ const LandingPage = () => {
                     </a>
                   </div>
                   <div className="mt-3">
-                    <span className="text-sm mr-3">Follow us</span>
+                    <span className="text-base mr-3">Follow us</span>
                     <div className="inline-flex items-center gap-3">
                       {[
                         {

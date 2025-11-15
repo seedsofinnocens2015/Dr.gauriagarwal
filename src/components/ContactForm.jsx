@@ -127,9 +127,9 @@ const ContactForm = () => {
         <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12 xl:gap-16">
           {/* Left Section - Heading */}
           <div className="w-full lg:w-1/5 flex-shrink-0 sm:mt-8">
-            <h2 className="text-blue-900 font-bold" style={{ fontFamily: 'sans-serif' }}>
-              <span className="text-base sm:text-lg lg:text-xl xl:text-2xl mb-2 sm:block">
-                REQUEST FOR YOUR <span className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl">Consultation</span>
+            <h2 className="text-blue-900 font-bold">
+              <span className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl mb-2 sm:block">
+                REQUEST FOR YOUR <span className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl">Consultation</span>
               </span>
             </h2>
             
@@ -149,7 +149,7 @@ const ContactForm = () => {
                     value={formData.husbandName}
                     onChange={handleChange}
                     className="w-full px-6 py-3 sm:py-4 bg-gray-100 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition-all"
-                    style={{ fontFamily: 'sans-serif', minWidth: '250px' }}
+                    style={{ minWidth: '250px' }}
                   />
                 </div>
 
@@ -162,7 +162,6 @@ const ContactForm = () => {
                     value={formData.wifeName}
                     onChange={handleChange}
                     className="w-full px-4 py-3 sm:py-4 bg-gray-100 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition-all"
-                    style={{ fontFamily: 'sans-serif' }}
                   />
                 </div>
 
@@ -175,7 +174,6 @@ const ContactForm = () => {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-3 sm:py-4 bg-gray-100 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition-all"
-                    style={{ fontFamily: 'sans-serif' }}
                   />
                 </div>
               </div>
@@ -191,7 +189,6 @@ const ContactForm = () => {
                     value={formData.typeOfService}
                     onChange={handleChange}
                     className="w-full px-4 py-3 sm:py-4 bg-gray-100 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition-all"
-                    style={{ fontFamily: 'sans-serif' }}
                   />
                 </div>
 
@@ -204,7 +201,6 @@ const ContactForm = () => {
                     value={formData.preferredDate}
                     onChange={handleChange}
                     className="w-full px-4 py-3 sm:py-4 bg-gray-100 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition-all"
-                    style={{ fontFamily: 'sans-serif' }}
                   />
                 </div>
 
@@ -214,7 +210,6 @@ const ContactForm = () => {
                     type="submit"
                     disabled={isSubmitting || isSubmitted}
                     className="w-full bg-blue-900 text-white font-bold px-6 py-3 sm:py-4 hover:bg-blue-800 transition-colors text-base sm:text-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ fontFamily: 'sans-serif' }}
                   >
                     {isSubmitting ? 'Submitting...' : isSubmitted ? 'Already Submitted' : 'Book appointment'}
                   </button>
@@ -224,7 +219,7 @@ const ContactForm = () => {
               {/* Success/Error Message */}
               {submitMessage && (
                 <div className={`mt-4 p-4 rounded-lg ${submitError ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-green-50 text-green-700 border border-green-200'}`}>
-                  <p className="text-sm sm:text-base" style={{ fontFamily: 'sans-serif' }}>
+                  <p className="text-sm sm:text-base">
                     {submitMessage}
                   </p>
                 </div>
