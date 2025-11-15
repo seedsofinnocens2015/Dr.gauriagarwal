@@ -4,7 +4,7 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({
     husbandName: '',
     wifeName: '',
-    email: '',
+    phone: '',
     typeOfService: '',
     preferredDate: ''
   })
@@ -13,15 +13,15 @@ const ContactForm = () => {
   const [submitError, setSubmitError] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  // Check if user has already submitted with this email
+  // Check if user has already submitted with this phone number
   useEffect(() => {
     const checkSubmission = () => {
-      const submittedEmails = JSON.parse(localStorage.getItem('submittedEmails') || '[]')
-      const currentEmail = formData.email.toLowerCase().trim()
+      const submittedPhones = JSON.parse(localStorage.getItem('submittedPhones') || '[]')
+      const currentPhone = formData.phone.trim().replace(/\D/g, '') // Remove non-digits for comparison
       
-      if (currentEmail && submittedEmails.includes(currentEmail)) {
+      if (currentPhone && submittedPhones.includes(currentPhone)) {
         setIsSubmitted(true)
-        setSubmitMessage('You have already submitted a consultation request with this email. Please use a different email or contact us directly.')
+        setSubmitMessage('You have already submitted a consultation request with this phone number. Please use a different phone number or contact us directly.')
         setSubmitError(true)
       } else {
         setIsSubmitted(false)
@@ -32,10 +32,10 @@ const ContactForm = () => {
       }
     }
 
-    if (formData.email) {
+    if (formData.phone) {
       checkSubmission()
     }
-  }, [formData.email])
+  }, [formData.phone])
 
   // Auto refresh page after successful submission
   useEffect(() => {
@@ -64,11 +64,11 @@ const ContactForm = () => {
     e.preventDefault()
     
     // Check if already submitted
-    const submittedEmails = JSON.parse(localStorage.getItem('submittedEmails') || '[]')
-    const currentEmail = formData.email.toLowerCase().trim()
+    const submittedPhones = JSON.parse(localStorage.getItem('submittedPhones') || '[]')
+    const currentPhone = formData.phone.trim().replace(/\D/g, '') // Remove non-digits for comparison
     
-    if (submittedEmails.includes(currentEmail)) {
-      setSubmitMessage('You have already submitted a consultation request with this email. Please use a different email or contact us directly.')
+    if (submittedPhones.includes(currentPhone)) {
+      setSubmitMessage('You have already submitted a consultation request with this phone number. Please use a different phone number or contact us directly.')
       setSubmitError(true)
       return
     }
@@ -80,6 +80,7 @@ const ContactForm = () => {
     try {
       // API endpoint - adjust this URL based on your backend deployment
       const API_URL = 'https://dr-gauriagarwal-backend.vercel.app/api/contact'
+      // const API_URL = 'http://localhost:5000/api/contact'
       
       const response = await fetch(API_URL, {
         method: 'POST',
@@ -92,9 +93,9 @@ const ContactForm = () => {
       const data = await response.json()
 
       if (response.ok && data.success) {
-        // Store email in localStorage to prevent duplicate submissions
-        submittedEmails.push(currentEmail)
-        localStorage.setItem('submittedEmails', JSON.stringify(submittedEmails))
+        // Store phone in localStorage to prevent duplicate submissions
+        submittedPhones.push(currentPhone)
+        localStorage.setItem('submittedPhones', JSON.stringify(submittedPhones))
         
         setSubmitMessage(data.message || 'Your consultation request has been submitted successfully!')
         setSubmitError(false)
@@ -104,7 +105,7 @@ const ContactForm = () => {
         setFormData({
           husbandName: '',
           wifeName: '',
-          email: '',
+          phone: '',
           typeOfService: '',
           preferredDate: ''
         })
@@ -165,13 +166,13 @@ const ContactForm = () => {
                   />
                 </div>
 
-                {/* Email */}
+                {/* Phone Number */}
                 <div className="sm:col-span-2 lg:col-span-1">
                   <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={formData.email}
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 sm:py-4 bg-gray-100 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent transition-all"
                   />
